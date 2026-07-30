@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#090d24" name="theme-color"/>
+<meta content="PixelArray Games — oficjalne strony gier Geometryczna Ewolucja i Dungeon Tiler. Wybierz projekt, przejdź do zapowiedzi i sprawdź aktualności, opinie oraz politykę prywatności." name="description"/>
+<title>PixelArray Games — Wybór gry</title>
+<style>
+    :root {
+      --night-950: #050716;
+      --night-900: #090d24;
+      --night-800: #10183a;
+      --night-700: #192452;
+      --ink: #24170f;
+      --ink-soft: #60452e;
+      --cream-50: #fff8dc;
+      --cream-100: #f8e9bc;
+      --cream-200: #efd493;
+      --cream-300: #deb86f;
+      --caramel-500: #aa642d;
+      --wood-700: #62351d;
+      --wood-900: #2d160f;
+      --gold-300: #ffd66a;
+      --gold-500: #ffae24;
+      --blue-300: #8ed7ff;
+      --blue-500: #429ce8;
+      --purple-300: #e185ff;
+      --purple-500: #a63ee8;
+      --green-400: #9acf48;
+      --red-400: #e85a46;
+      --shadow: rgba(0, 0, 0, .42);
+      --pixel: "Courier New", "Lucida Console", monospace;
+      --reading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--night-950);
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--cream-50);
+      font-family: var(--reading);
+      line-height: 1.65;
+      background:
+        linear-gradient(rgba(5, 7, 22, .70), rgba(5, 7, 22, .90)),
+        url("assets/geometric-world.webp") center top / cover fixed no-repeat,
+        var(--night-950);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .8;
+      background-image:
+        radial-gradient(circle at 12% 16%, #ffffff 0 1px, transparent 1.6px),
+        radial-gradient(circle at 74% 11%, #ffbf3b 0 1px, transparent 1.7px),
+        radial-gradient(circle at 87% 38%, #b45cff 0 1px, transparent 1.8px),
+        radial-gradient(circle at 32% 73%, #6ecbff 0 1px, transparent 1.6px);
+      background-size: 95px 95px, 131px 131px, 173px 173px, 227px 227px;
+      animation: stars 18s linear infinite;
+    }
+
+    @keyframes stars {
+      to { background-position: 95px 95px, -131px 131px, 173px -173px, -227px -227px; }
+    }
+
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 28px));
+      margin-inline: auto;
+      padding: 28px 0 56px;
+    }
+
+    /* ===== Hero / logo ===== */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: 104px 1fr 104px;
+      align-items: center;
+      gap: 24px;
+      min-height: 220px;
+      padding: 30px 36px;
+      border: 4px solid var(--gold-500);
+      outline: 4px solid var(--wood-900);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(20, 28, 65, .92), rgba(8, 11, 31, .96)),
+        repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,255,255,.03) 46px 48px);
+      box-shadow:
+        0 0 0 4px var(--caramel-500),
+        0 16px 0 rgba(25, 11, 8, .88),
+        0 26px 42px var(--shadow),
+        inset 0 0 42px rgba(95, 40, 184, .22);
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "◆";
+      position: absolute;
+      top: 50%;
+      translate: 0 -50%;
+      color: var(--purple-300);
+      font-size: 44px;
+      line-height: 1;
+      text-shadow: 0 0 8px #c65cff, 0 0 22px #7319c5;
+      z-index: -1;
+    }
+    .hero::before { left: 14px; }
+    .hero::after { right: 14px; }
+
+    .hero-icon {
+      width: 104px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 4px solid var(--gold-500);
+      outline: 4px solid var(--wood-900);
+      border-radius: 16px;
+      image-rendering: pixelated;
+      box-shadow: 0 8px 0 var(--wood-900), 0 0 26px rgba(187, 63, 255, .6);
+    }
+
+    .hero-center { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--gold-300);
+      font: 700 clamp(.72rem, 1.4vw, .92rem)/1.4 var(--pixel);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .logo {
+      margin: 0;
+      font-family: var(--pixel);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .logo-blue {
+      display: block;
+      color: #c9edff;
+      font-size: clamp(2rem, 5.4vw, 4.65rem);
+      text-shadow:
+        0 3px 0 #5ea6dc,
+        0 7px 0 #23518b,
+        0 10px 0 #122c56,
+        0 14px 18px #000;
+    }
+
+    .logo-gold {
+      display: block;
+      margin-top: .22em;
+      color: #ffd157;
+      font-size: clamp(2.25rem, 6.2vw, 5.3rem);
+      text-shadow:
+        0 3px 0 #e99018,
+        0 7px 0 #9a4d16,
+        0 10px 0 #4a240d,
+        0 14px 18px #000;
+    }
+
+    .hero-subtitle {
+      margin: 22px 0 0;
+      color: #f8efd3;
+      font: 700 clamp(.72rem, 1.3vw, .95rem)/1.5 var(--pixel);
+      letter-spacing: .08em;
+    }
+
+    .hero-decoration {
+      display: grid;
+      place-items: center;
+      color: var(--blue-300);
+      font-size: 70px;
+      text-shadow: 0 0 14px rgba(76, 187, 255, .85);
+      opacity: .82;
+    }
+
+    /* ===== Main navigation prepared for future pages ===== */
+    .site-tabs {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 30px 0 26px;
+      padding: 10px;
+      border: 4px solid var(--wood-900);
+      border-radius: 16px;
+      background: rgba(44, 24, 16, .95);
+      box-shadow: 0 8px 0 rgba(16, 8, 7, .92), 0 14px 30px var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .site-tab {
+      min-height: 60px;
+      padding: 10px 12px;
+      border: 3px solid #8d552f;
+      border-radius: 10px;
+      color: var(--ink);
+      background: linear-gradient(145deg, #fff1c3, #dca55d);
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.65), 0 5px 0 #65341c;
+      cursor: pointer;
+      font: 900 .78rem/1.2 var(--pixel);
+      text-transform: uppercase;
+      transition: translate .15s ease, filter .15s ease, box-shadow .15s ease;
+    }
+
+    .site-tab:hover { filter: brightness(1.08); translate: 0 -2px; }
+    .site-tab:active { translate: 0 3px; box-shadow: inset 0 2px 0 rgba(255,255,255,.45), 0 2px 0 #65341c; }
+    .site-tab[aria-selected="true"] {
+      color: white;
+      border-color: #e9a2ff;
+      background: linear-gradient(145deg, #be62ef, #6d27ab);
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.27), 0 5px 0 #321252, 0 0 18px rgba(193, 73, 255, .55);
+    }
+
+    .tab-icon { display: block; margin-bottom: 4px; font-size: 1.35rem; }
+
+    /* ===== Page router ===== */
+    .page[hidden] { display: none; }
+
+    .page-frame {
+      position: relative;
+      padding: 18px;
+      border: 4px solid var(--wood-900);
+      border-radius: 20px;
+      background:
+        linear-gradient(rgba(73, 38, 20, .96), rgba(42, 20, 13, .97)),
+        repeating-linear-gradient(0deg, transparent 0 54px, rgba(255,255,255,.04) 54px 57px);
+      box-shadow: 0 12px 0 #170b08, 0 28px 55px rgba(0,0,0,.55);
+    }
+
+    .page-frame::before,
+    .page-frame::after {
+      content: "◆";
+      position: absolute;
+      top: -25px;
+      color: var(--purple-300);
+      font-size: 38px;
+      text-shadow: 0 0 12px var(--purple-500);
+    }
+    .page-frame::before { left: 32px; }
+    .page-frame::after { right: 32px; }
+
+    .panel {
+      color: var(--ink);
+      border: 4px solid #9d5b2d;
+      outline: 3px solid #f7d784;
+      border-radius: 14px;
+      background:
+        linear-gradient(rgba(255, 250, 225, .96), rgba(244, 218, 157, .97)),
+        repeating-linear-gradient(90deg, transparent 0 74px, rgba(115, 66, 25, .045) 74px 76px);
+      box-shadow: inset 0 0 0 4px #6b371e, inset 0 0 40px rgba(132, 68, 24, .15);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 30px 32px 24px;
+      border-bottom: 3px solid rgba(111, 61, 30, .35);
+      background: linear-gradient(180deg, rgba(255,255,255,.42), transparent);
+    }
+
+    .panel-title-wrap { display: flex; gap: 18px; align-items: center; }
+
+    .flag-tile {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 58px;
+      aspect-ratio: 1;
+      border: 3px solid #9a5b2d;
+      border-radius: 9px;
+      background: #fff4d5;
+      box-shadow: 0 5px 0 #66351d;
+      font-size: 30px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font: 900 clamp(1.45rem, 3.3vw, 2.55rem)/1.05 var(--pixel);
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      margin: 8px 0 0;
+      color: var(--ink-soft);
+      font: 700 .84rem/1.5 var(--pixel);
+    }
+
+    .language-switch {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 9px;
+    }
+
+    .language-button {
+      padding: 10px 14px;
+      border: 2px solid #8c532d;
+      border-radius: 8px;
+      color: var(--ink);
+      background: linear-gradient(#fff6d8, #e5bd78);
+      box-shadow: 0 4px 0 #67361f;
+      cursor: pointer;
+      font: 900 .76rem/1.1 var(--pixel);
+    }
+
+    .language-button[aria-pressed="true"] {
+      color: white;
+      border-color: #d890fa;
+      background: linear-gradient(#c45bf0, #7529aa);
+      box-shadow: 0 4px 0 #40165d, 0 0 12px rgba(165, 55, 230, .38);
+    }
+
+    .policy-body { padding: 28px 30px 34px; }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .policy-section {
+      position: relative;
+      min-width: 0;
+      padding: 20px 20px 18px 76px;
+      border: 2px solid rgba(138, 77, 36, .36);
+      border-radius: 12px;
+      background: rgba(255, 249, 222, .65);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.72), 0 4px 0 rgba(110, 57, 28, .18);
+    }
+
+    .section-number {
+      position: absolute;
+      top: 18px;
+      left: 16px;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      aspect-ratio: 1;
+      color: white;
+      border: 3px solid #f4d877;
+      outline: 2px solid #6c371f;
+      border-radius: 9px;
+      background: linear-gradient(145deg, #ba52ec, #6221a0);
+      box-shadow: 0 5px 0 #3d155d, 0 0 12px rgba(169, 61, 235, .38);
+      font: 900 1rem/1 var(--pixel);
+    }
+
+    .policy-section:nth-child(4n + 2) .section-number { background: linear-gradient(145deg, #58c8ff, #206eb9); box-shadow: 0 5px 0 #123e73; }
+    .policy-section:nth-child(4n + 3) .section-number { background: linear-gradient(145deg, #a9d94d, #4e861e); box-shadow: 0 5px 0 #2c5115; }
+    .policy-section:nth-child(4n) .section-number { background: linear-gradient(145deg, #ffd85e, #e48013); box-shadow: 0 5px 0 #8b400d; }
+
+    .policy-section h3 {
+      margin: 0 0 9px;
+      font: 900 1rem/1.3 var(--pixel);
+      letter-spacing: -.015em;
+    }
+
+    .policy-section p { margin: 0 0 10px; }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ul { margin: 10px 0 0; padding-left: 20px; }
+    .policy-section li + li { margin-top: 5px; }
+    .policy-section strong { color: #6c2b19; }
+
+    .policy-section.wide { grid-column: 1 / -1; }
+
+    .safety-commitment {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 2px solid #9d5a2f;
+      border-radius: 9px;
+      color: #512417;
+      background: linear-gradient(145deg, #fff7d7, #f2d58f);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.72), 0 3px 0 #784022;
+      font-weight: 800;
+    }
+
+    .safety-commitment::before {
+      content: "◆";
+      flex: 0 0 auto;
+      color: #8c31ce;
+      text-shadow: 0 0 8px rgba(166, 62, 232, .45);
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      max-width: 100%;
+      margin-top: 4px;
+      padding: 9px 12px;
+      border: 2px solid #9d5a2f;
+      border-radius: 7px;
+      color: #532199;
+      background: #fff7d7;
+      box-shadow: 0 3px 0 #784022;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      text-decoration: none;
+    }
+
+    .contact-link:hover { filter: brightness(1.04); }
+
+    /* ===== Placeholder pages for future tabs ===== */
+    .future-page {
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: 26px;
+      align-items: center;
+      padding: 42px;
+    }
+
+    .future-copy h2 {
+      margin: 0 0 14px;
+      font: 900 clamp(1.8rem, 4vw, 3.4rem)/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .future-copy p { max-width: 700px; color: var(--ink-soft); font-size: 1.05rem; }
+
+    .coming-soon {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border: 2px solid #915329;
+      border-radius: 8px;
+      background: #f4cb7f;
+      box-shadow: 0 4px 0 #74401f;
+      font: 900 .8rem/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .mini-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+      padding: 12px;
+      border: 4px solid #5a2e1b;
+      border-radius: 14px;
+      background: #8c562e;
+      box-shadow: 0 8px 0 #3e1f13, 0 15px 25px rgba(66, 31, 15, .3);
+    }
+
+    .mini-tile {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      color: #fff7dd;
+      background: #6e4027;
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.1);
+      font: 900 clamp(.72rem, 2vw, 1.2rem)/1 var(--pixel);
+    }
+    .mini-tile:nth-child(3n) { background: #a34fe1; }
+    .mini-tile:nth-child(5n) { background: #358ccf; }
+    .mini-tile:nth-child(7n) { background: #e19824; }
+
+    .developer-note {
+      margin-top: 22px;
+      padding: 15px 17px;
+      border-left: 5px solid var(--purple-500);
+      color: #d8d9f3;
+      background: rgba(13, 18, 48, .86);
+      font-size: .9rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 24px 26px;
+      border: 4px solid var(--wood-900);
+      border-radius: 14px;
+      color: #f8df9b;
+      background: rgba(32, 17, 14, .95);
+      box-shadow: 0 8px 0 #100806;
+      text-align: center;
+      font: 700 .78rem/1.6 var(--pixel);
+    }
+
+    footer::before { content: "◆  "; color: var(--purple-300); }
+    footer::after { content: "  ◆"; color: var(--purple-300); }
+
+    :focus-visible {
+      outline: 4px solid #8ee8ff;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 980px) {
+      .site-tabs {
+        grid-template-columns: repeat(6, 148px);
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+      }
+      .site-tab { scroll-snap-align: start; }
+      .hero { grid-template-columns: 82px 1fr 82px; padding-inline: 24px; }
+      .hero-icon { width: 82px; }
+      .hero-decoration { font-size: 54px; }
+      .policy-grid { grid-template-columns: 1fr; }
+      .policy-section.wide { grid-column: auto; }
+      .future-page { grid-template-columns: 1fr; }
+      .mini-board { max-width: 440px; }
+    }
+
+    @media (max-width: 680px) {
+      body { background-attachment: scroll; }
+      .site-shell { width: min(100% - 18px, 1180px); padding-top: 14px; }
+      .hero { grid-template-columns: 1fr; min-height: 0; gap: 18px; padding: 24px 18px 30px; }
+      .hero-icon { width: 86px; margin-inline: auto; }
+      .hero-decoration { display: none; }
+      .hero::before, .hero::after { top: 24px; translate: 0; font-size: 30px; }
+      .logo-blue { font-size: clamp(1.75rem, 10vw, 2.7rem); }
+      .logo-gold { font-size: clamp(2rem, 12vw, 3.25rem); }
+      .site-tabs { top: 4px; margin-top: 24px; }
+      .page-frame { padding: 10px; }
+      .panel-head { display: block; padding: 24px 18px 20px; }
+      .panel-title-wrap { align-items: flex-start; }
+      .flag-tile { width: 48px; font-size: 24px; }
+      .language-switch { justify-content: flex-start; margin-top: 20px; }
+      .policy-body { padding: 20px 16px 24px; }
+      .policy-section { padding: 18px 16px 18px 68px; }
+      .section-number { width: 40px; left: 14px; }
+      .future-page { min-height: 480px; padding: 26px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+  
+
+    /* ===== Global page language switch (privacy policy keeps its own switch) ===== */
+    .global-language-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin: 18px 0 -12px;
+    }
+
+    .site-language-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 9px 16px;
+      border: 3px solid #8d552f;
+      border-radius: 10px;
+      color: var(--ink);
+      background: linear-gradient(145deg, #fff1c3, #dca55d);
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.65), 0 5px 0 #65341c;
+      cursor: pointer;
+      font: 900 .78rem/1 var(--pixel);
+      text-transform: uppercase;
+      transition: translate .15s ease, filter .15s ease;
+    }
+
+    .site-language-toggle:hover { filter: brightness(1.08); translate: 0 -2px; }
+    .site-language-toggle:active { translate: 0 2px; }
+    .site-language-flag { font-size: 1.25rem; }
+
+    /* ===== Geometric game boards ===== */
+    .geometry-board { align-self: center; }
+
+    .shape-tile {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-width: 0;
+      background: #754329;
+      box-shadow:
+        inset 0 3px 0 rgba(255,255,255,.12),
+        inset 0 -4px 0 rgba(45,20,12,.18),
+        0 2px 0 rgba(57,27,17,.35);
+    }
+
+    .shape-tile::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      z-index: -1;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 6px;
+    }
+
+    .shape-tile img {
+      display: block;
+      width: 78%;
+      height: 78%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 5px 0 rgba(45, 18, 16, .28));
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .shape-tile:hover img {
+      transform: translateY(-3px) scale(1.06);
+      filter: drop-shadow(0 7px 0 rgba(45, 18, 16, .28)) drop-shadow(0 0 8px rgba(255,255,255,.3));
+    }
+
+    .shape-tile.tier-1 { background: linear-gradient(145deg, #825033, #65381f); }
+    .shape-tile.tier-2 { background: linear-gradient(145deg, #b34fe7, #7b2fc3); }
+    .shape-tile.tier-3 { background: linear-gradient(145deg, #43a9e4, #267bbb); }
+    .shape-tile.tier-4 { background: linear-gradient(145deg, #f0aa28, #d98417); }
+
+    .page-eyebrow { color: #8b4a24; }
+
+    .start-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .start-actions .coming-soon { margin-top: 0; }
+
+    .play-store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 190px;
+      padding: 9px 15px 9px 11px;
+      border: 3px solid #54301d;
+      border-radius: 10px;
+      color: #fff;
+      background: linear-gradient(180deg, #222, #090909);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.16), 0 5px 0 #5c321d;
+      user-select: none;
+    }
+
+    .play-store-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+    .play-store-badge span { display: grid; line-height: 1; }
+    .play-store-badge small { margin-bottom: 4px; font: 700 .62rem/1 var(--reading); }
+    .play-store-badge strong { font: 700 1.05rem/1 var(--reading); }
+
+    .feature-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .feature-chips span {
+      padding: 8px 11px;
+      border: 2px solid #8c532d;
+      border-radius: 8px;
+      color: #55301d;
+      background: #f4cb7f;
+      box-shadow: 0 3px 0 #74401f;
+      font: 900 .7rem/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 680px) {
+      .global-language-bar { margin-top: 14px; }
+      .site-language-toggle { width: 100%; justify-content: center; }
+      .start-actions { align-items: stretch; }
+      .play-store-badge { width: 100%; justify-content: center; }
+      .shape-tile img { width: 72%; height: 72%; }
+    }
+
+
+    /* ===== Version 1.2.0: video, update and feedback pages ===== */
+    .game-video-block {
+      grid-column: 1 / -1;
+      min-width: 0;
+      margin-top: 4px;
+      padding-top: 24px;
+      border-top: 3px solid rgba(111, 61, 30, .28);
+    }
+
+    .video-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .video-heading h3 {
+      margin: 0;
+      font: 900 clamp(1.08rem, 2.3vw, 1.55rem)/1.2 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .video-language-badge,
+    .version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 2px solid #8c532d;
+      border-radius: 8px;
+      color: #55301d;
+      background: #f4cb7f;
+      box-shadow: 0 3px 0 #74401f;
+      font: 900 .7rem/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .video-frame {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 4px solid #5a2e1b;
+      outline: 3px solid #f4cf76;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(167, 62, 232, .35), transparent 42%),
+        #080c24;
+      box-shadow: 0 8px 0 #3e1f13, 0 16px 26px rgba(66, 31, 15, .28);
+    }
+
+    .video-frame iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-note {
+      margin: 15px 0 0;
+      color: var(--ink-soft);
+      font-size: .88rem;
+    }
+
+    .content-page {
+      min-height: 560px;
+      padding: 42px;
+    }
+
+    .content-page > .eyebrow { color: #8b4a24; }
+
+    .content-page > h2 {
+      margin: 0 0 14px;
+      font: 900 clamp(1.8rem, 4vw, 3.4rem)/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .content-lead {
+      max-width: 900px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+
+    .update-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .update-grid,
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .update-card,
+    .feedback-card {
+      position: relative;
+      min-width: 0;
+      padding: 20px 20px 18px 68px;
+      border: 2px solid rgba(138, 77, 36, .38);
+      border-radius: 12px;
+      background: rgba(255, 249, 222, .72);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.72), 0 4px 0 rgba(110, 57, 28, .18);
+    }
+
+    .update-card::before,
+    .feedback-card::before {
+      content: attr(data-icon);
+      position: absolute;
+      top: 18px;
+      left: 16px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      aspect-ratio: 1;
+      border: 3px solid #f4d877;
+      outline: 2px solid #6c371f;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(145deg, #ba52ec, #6221a0);
+      box-shadow: 0 4px 0 #3d155d;
+      font: 900 1rem/1 var(--pixel);
+    }
+
+    .update-card:nth-child(4n + 2)::before,
+    .feedback-card:nth-child(4n + 2)::before { background: linear-gradient(145deg, #58c8ff, #206eb9); box-shadow: 0 4px 0 #123e73; }
+    .update-card:nth-child(4n + 3)::before,
+    .feedback-card:nth-child(4n + 3)::before { background: linear-gradient(145deg, #a9d94d, #4e861e); box-shadow: 0 4px 0 #2c5115; }
+    .update-card:nth-child(4n)::before,
+    .feedback-card:nth-child(4n)::before { background: linear-gradient(145deg, #ffd85e, #e48013); box-shadow: 0 4px 0 #8b400d; }
+
+    .update-card h3,
+    .feedback-card h3 {
+      margin: 0 0 8px;
+      font: 900 .98rem/1.3 var(--pixel);
+    }
+
+    .update-card p,
+    .feedback-card p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .update-footer,
+    .feedback-cta {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border: 3px solid #8c532d;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #fff4c6, #e9bb70);
+      box-shadow: 0 5px 0 #74401f;
+    }
+
+    .update-footer strong,
+    .feedback-cta strong { color: #6c2b19; }
+
+    .feedback-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 9px 12px;
+      border: 2px solid #8c532d;
+      border-radius: 8px;
+      color: #55301d;
+      background: #f4cb7f;
+      box-shadow: 0 3px 0 #74401f;
+      font: 900 .72rem/1.2 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .feedback-contact {
+      margin-top: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .content-page { min-height: 0; padding: 26px 18px; }
+      .update-grid, .feedback-grid { grid-template-columns: 1fr; }
+      .game-video-block { padding-top: 20px; }
+    }
+
+
+
+    /* ===== Update history ===== */
+    .update-history-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 26px;
+      padding: 22px;
+      border: 3px solid rgba(120, 64, 30, .42);
+      border-radius: 13px;
+      background: linear-gradient(145deg, rgba(255, 247, 214, .88), rgba(239, 207, 139, .88));
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.72), 0 5px 0 rgba(110, 57, 28, .24);
+    }
+
+    .update-history-link-copy { min-width: 0; }
+    .update-history-link-copy strong {
+      display: block;
+      margin-bottom: 5px;
+      font: 900 .94rem/1.25 var(--pixel);
+      text-transform: uppercase;
+    }
+    .update-history-link-copy p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .update-history-link,
+    .history-back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 11px 15px;
+      border: 3px solid #8d552f;
+      border-radius: 10px;
+      color: #fff;
+      background: linear-gradient(145deg, #bd5dec, #7127ad);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.22), 0 5px 0 #3d155d;
+      font: 900 .74rem/1.2 var(--pixel);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: translate .15s ease, filter .15s ease;
+    }
+    .update-history-link:hover,
+    .history-back-link:hover { filter: brightness(1.08); translate: 0 -2px; }
+    .update-history-link:active,
+    .history-back-link:active { translate: 0 2px; }
+
+    .history-back-link {
+      margin-bottom: 25px;
+      color: var(--ink);
+      background: linear-gradient(145deg, #fff1c3, #dca55d);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.62), 0 5px 0 #65341c;
+    }
+
+    .update-timeline {
+      position: relative;
+      display: grid;
+      gap: 20px;
+      margin-top: 32px;
+      padding-left: 28px;
+    }
+
+    .update-timeline::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      bottom: 12px;
+      left: 8px;
+      width: 5px;
+      border-radius: 999px;
+      background: linear-gradient(var(--purple-500), var(--blue-500), var(--gold-500));
+      box-shadow: 0 0 12px rgba(166, 62, 232, .34);
+    }
+
+    .history-entry {
+      position: relative;
+      padding: 24px;
+      border: 3px solid rgba(138, 77, 36, .42);
+      border-radius: 14px;
+      background: rgba(255, 249, 222, .76);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.76), 0 5px 0 rgba(110, 57, 28, .2);
+    }
+
+    .history-entry::before {
+      content: "◆";
+      position: absolute;
+      top: 25px;
+      left: -36px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      aspect-ratio: 1;
+      border: 3px solid #f4d877;
+      outline: 2px solid #6c371f;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(145deg, #ba52ec, #6221a0);
+      box-shadow: 0 4px 0 #3d155d, 0 0 12px rgba(169, 61, 235, .32);
+      font: 900 .78rem/1 var(--pixel);
+    }
+
+    .history-entry.archived::before {
+      background: linear-gradient(145deg, #58c8ff, #206eb9);
+      box-shadow: 0 4px 0 #123e73, 0 0 12px rgba(66, 156, 232, .28);
+    }
+
+    .history-entry-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .history-entry h3 {
+      margin: 0;
+      font: 900 clamp(1.05rem, 2.4vw, 1.5rem)/1.2 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .history-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border: 2px solid #8c532d;
+      border-radius: 8px;
+      color: #55301d;
+      background: #f4cb7f;
+      box-shadow: 0 3px 0 #74401f;
+      font: 900 .65rem/1 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .history-entry p { margin: 0; color: var(--ink-soft); }
+    .history-entry ul { margin: 15px 0 0; padding-left: 22px; }
+    .history-entry li + li { margin-top: 7px; }
+
+    @media (max-width: 680px) {
+      .update-history-link-row { align-items: stretch; padding: 18px; }
+      .update-history-link { width: 100%; }
+      .update-timeline { padding-left: 22px; }
+      .update-timeline::before { left: 5px; }
+      .history-entry { padding: 20px 17px; }
+      .history-entry::before { left: -31px; width: 27px; }
+    }
+
+
+
+    /* ===== PixelArray game selector ===== */
+    body.portal-open {
+      overflow: hidden;
+    }
+    body.portal-open .site-shell {
+      filter: blur(5px) saturate(.8);
+      pointer-events: none;
+      user-select: none;
+    }
+    .global-language-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .portal-open-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 10px;
+      font: 700 .85rem/1 var(--pixel);
+      letter-spacing: .05em;
+      color: #201107;
+      cursor: pointer;
+      background: linear-gradient(145deg, #c85dff, #7a2cc4);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.22), 0 5px 0 #42186a, 0 0 16px rgba(172, 78, 245, .26);
+      text-transform: uppercase;
+    }
+    .portal-open-button:hover,
+    .portal-open-button:focus-visible {
+      filter: brightness(1.06);
+      outline: 2px solid #fff8dc;
+      outline-offset: 2px;
+    }
+    .portal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at top, rgba(181, 76, 255, .18), transparent 40%),
+        linear-gradient(rgba(4, 6, 19, .72), rgba(3, 4, 16, .92));
+      backdrop-filter: blur(8px);
+    }
+    .portal-window {
+      width: min(100%, 1180px);
+      padding: 22px;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(18, 22, 53, .95), rgba(7, 9, 26, .98)),
+        repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,255,255,.03) 46px 48px);
+      box-shadow: 0 18px 0 #050713, 0 34px 70px rgba(0,0,0,.58), inset 0 0 0 4px rgba(219, 169, 75, .18);
+      border: 1px solid rgba(220, 165, 93, .36);
+    }
+    .portal-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .portal-title {
+      margin: 10px 0 8px;
+      color: var(--cream-50);
+      font: 700 clamp(2rem, 3vw, 3.1rem)/1 var(--pixel);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-shadow: 0 0 14px rgba(169, 61, 235, .35);
+    }
+    .portal-subtitle {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #d8ddf4;
+      font-size: 1rem;
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .portal-card {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 251, 232, .97), rgba(240, 213, 144, .98));
+      box-shadow: inset 0 0 0 4px #6b371e, inset 0 0 26px rgba(132, 68, 24, .12), 0 10px 0 #170b08;
+      color: var(--ink);
+    }
+    .portal-card.is-unavailable {
+      filter: saturate(.82);
+    }
+    .portal-card-media {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 3px solid #301510;
+      box-shadow: 0 6px 0 rgba(28, 13, 11, .9);
+      background: #130a0f;
+    }
+    .portal-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      image-rendering: auto;
+    }
+    .portal-card-head {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .portal-card-icon {
+      width: 72px;
+      height: 72px;
+      flex: 0 0 auto;
+      border-radius: 16px;
+      border: 3px solid #4d2617;
+      box-shadow: 0 5px 0 rgba(77, 38, 23, .65);
+      object-fit: cover;
+      background: #190f11;
+    }
+    .portal-card-text h3 {
+      margin: 0 0 6px;
+      font: 700 clamp(1.2rem, 2vw, 1.7rem)/1.1 var(--pixel);
+      color: #5c2318;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .portal-card-text p {
+      margin: 0;
+      color: #5f4837;
+      font-size: .97rem;
+    }
+    .portal-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #fff1c3, #dca55d);
+      color: #6d2c16;
+      font: 700 .72rem/1 var(--pixel);
+      box-shadow: 0 3px 0 #74401f;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .portal-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .portal-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 210px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 10px;
+      font: 700 .84rem/1 var(--pixel);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--cream-50);
+      cursor: pointer;
+      background: linear-gradient(145deg, #ba52ec, #6221a0);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.22), 0 5px 0 #3d155d, 0 0 12px rgba(169, 61, 235, .32);
+    }
+    .portal-button:hover,
+    .portal-button:focus-visible {
+      filter: brightness(1.08);
+      outline: 2px solid #fff8dc;
+      outline-offset: 2px;
+    }
+    .portal-button.is-disabled,
+    .portal-button:disabled {
+      cursor: not-allowed;
+      color: rgba(255,248,220,.72);
+      background: linear-gradient(145deg, #777, #4e4e4e);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.12), 0 5px 0 #2b2b2b;
+    }
+    .portal-footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: #d8ddf4;
+      font-size: .92rem;
+    }
+    @media (max-width: 900px) {
+      .portal-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .portal-window { padding: 16px; border-radius: 18px; }
+      .portal-card { padding: 14px; }
+      .portal-card-head { align-items: flex-start; }
+      .portal-card-icon { width: 60px; height: 60px; }
+      .portal-actions { align-items: stretch; }
+      .portal-button { width: 100%; min-width: 0; }
+      .global-language-bar { justify-content: stretch; }
+      .portal-open-button, .site-language-toggle { width: 100%; justify-content: center; }
+    }
+
+
+
+    /* ===== V9 landing page upgrades ===== */
+    body.hub-active {
+      overflow: auto;
+      background:
+        radial-gradient(circle at top, rgba(157, 64, 236, .18), transparent 34%),
+        linear-gradient(180deg, #060818 0%, #090d24 35%, #0f1635 100%);
+    }
+    body.hub-active .site-shell {
+      display: none;
+    }
+    body.hub-active .portal-overlay {
+      position: relative;
+      inset: auto;
+      min-height: 100vh;
+      padding: 32px 18px 42px;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      backdrop-filter: none;
+    }
+    body.hub-active .portal-window {
+      width: min(100%, 1240px);
+      padding: 26px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(18, 22, 53, .98), rgba(7, 9, 26, 1)),
+        radial-gradient(circle at 80% 12%, rgba(211, 140, 47, .12), transparent 26%);
+      box-shadow: 0 18px 0 #050713, 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 4px rgba(219, 169, 75, .18);
+    }
+    .portal-brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .portal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 210px;
+    }
+    .portal-meta-chip,
+    .portal-mini-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: linear-gradient(145deg, rgba(255, 239, 188, .18), rgba(138, 69, 219, .22));
+      color: #efe6ff;
+      border: 1px solid rgba(255,255,255,.1);
+      font: 700 .7rem/1 var(--pixel);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .portal-card-active {
+      box-shadow: inset 0 0 0 4px #6b371e, inset 0 0 26px rgba(132, 68, 24, .12), 0 10px 0 #170b08, 0 0 0 2px rgba(195, 91, 255, .16);
+    }
+    .portal-chiprow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: -2px;
+    }
+    .portal-card-points {
+      margin: 0;
+      padding: 0 0 0 22px;
+      color: #5b3e31;
+      display: grid;
+      gap: 8px;
+      font-size: .95rem;
+    }
+    .portal-card-points li::marker {
+      color: #8f36cd;
+    }
+    .portal-actions-double {
+      align-items: flex-end;
+    }
+    .portal-button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 1 1 auto;
+    }
+    .portal-button-secondary {
+      background: linear-gradient(145deg, #4ca6ff, #224ea4);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.22), 0 5px 0 #173066, 0 0 12px rgba(73, 145, 255, .24);
+    }
+    .portal-button-secondary:hover,
+    .portal-button-secondary:focus-visible {
+      filter: brightness(1.08);
+    }
+    .portal-footer-note {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    @media (max-width: 960px) {
+      .portal-brand-row {
+        flex-direction: column;
+      }
+      .portal-meta {
+        justify-content: flex-start;
+        min-width: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .portal-button-group {
+        width: 100%;
+      }
+      .portal-button-group .portal-button {
+        width: 100%;
+      }
+      .portal-actions-double {
+        align-items: stretch;
+      }
+      .portal-card-points {
+        font-size: .92rem;
+      }
+    }
+
+
+
+    /* ===== V10 animations and hover refinements ===== */
+    @keyframes portalFadeUp {
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes portalGlow {
+      0%, 100% { box-shadow: 0 18px 0 #050713, 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 4px rgba(219, 169, 75, .18); }
+      50% { box-shadow: 0 18px 0 #050713, 0 34px 92px rgba(81, 40, 131, .42), inset 0 0 0 4px rgba(219, 169, 75, .24); }
+    }
+    body.hub-active .portal-window {
+      animation: portalFadeUp .5s ease-out, portalGlow 7s ease-in-out infinite;
+    }
+    body.hub-active .portal-card {
+      animation: portalFadeUp .55s ease-out both;
+    }
+    body.hub-active .portal-card:nth-child(2) {
+      animation-delay: .08s;
+    }
+    .portal-card,
+    .feedback-card,
+    .video-card,
+    .panel,
+    .site-tab,
+    .portal-button,
+    .portal-open-button {
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .portal-card:hover,
+    .portal-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: inset 0 0 0 4px #6b371e, inset 0 0 28px rgba(132, 68, 24, .12), 0 16px 0 #170b08, 0 0 0 2px rgba(195, 91, 255, .18);
+    }
+    .portal-card:hover .portal-card-media img,
+    .portal-card:focus-within .portal-card-media img {
+      transform: scale(1.03);
+      filter: saturate(1.08);
+    }
+    .portal-card-media img {
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .portal-button:hover,
+    .portal-button:focus-visible,
+    .portal-open-button:hover,
+    .portal-open-button:focus-visible,
+    .site-tab:hover,
+    .site-tab:focus-visible {
+      transform: translateY(-2px);
+    }
+    .feedback-card:hover,
+    .video-card:hover,
+    .panel:hover {
+      transform: translateY(-2px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+
+    /* ===== V11: niezawodne przełączanie huba i stron gry ===== */
+    .portal-overlay[hidden] {
+      display: none !important;
+    }
+
+</style>
+</head>
+<body>
+<div class="portal-overlay" id="portal-overlay" hidden>
+<div aria-labelledby="portal-title" class="portal-window" role="region">
+<div class="portal-brand-row">
+<div>
+<p class="eyebrow" data-en="Official home of PixelArray Games" data-pl="Oficjalny dom PixelArray Games">Oficjalny dom PixelArray Games</p>
+<h1 class="portal-title" data-en="Choose your game" data-pl="Wybierz grę" id="portal-title">Wybierz grę</h1>
+<p class="portal-subtitle" data-en="Discover the worlds created by PixelArray Games. Play Geometric Evolution or learn more about the upcoming Dungeon Tiler." data-pl="Odkryj światy tworzone przez PixelArray Games. Przejdź do Geometrycznej Ewolucji albo poznaj nadchodzący Dungeon Tiler.">Odkryj światy tworzone przez PixelArray Games. Przejdź do Geometrycznej Ewolucji albo poznaj nadchodzący Dungeon Tiler.</p>
+</div>
+<div class="portal-meta">
+<span class="portal-meta-chip" data-en="2 projects" data-pl="2 projekty">2 projekty</span>
+<span class="portal-meta-chip" data-en="1 available · 1 upcoming" data-pl="1 dostępna · 1 nadchodząca">1 dostępna · 1 nadchodząca</span>
+</div>
+</div>
+<div class="portal-grid">
+<article class="portal-card portal-card-active">
+<div class="portal-card-media"><img alt="Geometryczna Ewolucja — grafika wyróżniająca" src="assets/portal/geometric-evolution-card.png"/></div>
+<div class="portal-card-head">
+<img alt="Ikona Geometrycznej Ewolucji" class="portal-card-icon" src="assets/portal/geometric-evolution-icon.png"/>
+<div class="portal-card-text">
+<h3>Geometryczna Ewolucja</h3>
+<p data-en="A 2048-inspired mobile puzzle about merging geometric shapes, unlocking sets, discovering collections and chasing high scores." data-pl="Mobilna gra logiczna inspirowana 2048, oparta na łączeniu figur geometrycznych, odblokowywaniu zestawów, odkrywaniu kolekcji i biciu rekordów.">Mobilna gra logiczna inspirowana 2048, oparta na łączeniu figur geometrycznych, odblokowywaniu zestawów, odkrywaniu kolekcji i biciu rekordów.</p>
+</div>
+</div>
+<div class="portal-chiprow">
+<span class="portal-mini-chip">2048</span>
+<span class="portal-mini-chip">Pixel-art</span>
+<span class="portal-mini-chip">Android</span>
+<span class="portal-mini-chip" data-en="4 modes" data-pl="4 tryby">4 tryby</span>
+</div>
+<ul class="portal-card-points">
+<li data-en="Merge identical shapes and build a full evolution chain." data-pl="Łącz identyczne figury i buduj pełny łańcuch ewolucji.">Łącz identyczne figury i buduj pełny łańcuch ewolucji.</li>
+<li data-en="Unlock collections, backgrounds, music and additional content." data-pl="Odblokowuj kolekcje, tła, muzykę i dodatkową zawartość.">Odblokowuj kolekcje, tła, muzykę i dodatkową zawartość.</li>
+<li data-en="Check news, update history, reviews and the privacy page." data-pl="Sprawdzaj aktualności, historię zmian, opinie i politykę prywatności.">Sprawdzaj aktualności, historię zmian, opinie i politykę prywatności.</li>
+</ul>
+<div class="portal-actions portal-actions-double">
+<span class="portal-status" data-en="Available now" data-pl="Dostępna teraz">Dostępna teraz</span>
+<div class="portal-button-group">
+<button class="portal-button" data-open-game="geometry" type="button"><span aria-hidden="true">◆</span><span data-en="Open game page" data-pl="Otwórz stronę gry">Otwórz stronę gry</span></button>
+<button class="portal-button portal-button-secondary" data-open-page="privacy" type="button"><span aria-hidden="true">🔒</span><span data-en="Privacy" data-pl="Prywatność">Prywatność</span></button>
+</div>
+</div>
+</article>
+<article class="portal-card is-unavailable" aria-disabled="true">
+<div class="portal-card-media"><img alt="Dungeon Tiler — grafika wyróżniająca" src="assets/portal/dungeon-tiler-card.png"/></div>
+<div class="portal-card-head">
+<img alt="Ikona Dungeon Tiler" class="portal-card-icon" src="assets/portal/dungeon-tiler-icon.png"/>
+<div class="portal-card-text">
+<h3>Dungeon Tiler</h3>
+<p data-en="A dark fantasy tile-building game about creating dungeon routes, facing monsters, collecting treasure and mastering increasingly dangerous locations." data-pl="Mroczna gra tile-buildingowa o budowaniu tras przez lochy, walce z potworami, zdobywaniu skarbów i opanowywaniu coraz niebezpieczniejszych krain.">Mroczna gra tile-buildingowa o budowaniu tras przez lochy, walce z potworami, zdobywaniu skarbów i opanowywaniu coraz niebezpieczniejszych krain.</p>
+</div>
+</div>
+<div class="portal-chiprow">
+<span class="portal-mini-chip" data-en="Dark fantasy" data-pl="Dark fantasy">Dark fantasy</span>
+<span class="portal-mini-chip" data-en="Tile builder" data-pl="Tile builder">Tile builder</span>
+<span class="portal-mini-chip" data-en="Upcoming" data-pl="Nadchodząca">Nadchodząca</span>
+</div>
+<ul class="portal-card-points">
+<li data-en="Build connected dungeon routes from tiles and adapt each layout to the challenges ahead." data-pl="Buduj połączone trasy z kafli i dopasowuj układ lochu do czekających wyzwań.">Buduj połączone trasy z kafli i dopasowuj układ lochu do czekających wyzwań.</li>
+<li data-en="Explore varied settings, including classic dungeons, pyramids, jungles, a sunken temple and a volcanic forge." data-pl="Odkrywaj różnorodne krainy: klasyczne lochy, piramidy, dżunglę, zatopioną świątynię i wulkaniczną kuźnię.">Odkrywaj różnorodne krainy: klasyczne lochy, piramidy, dżunglę, zatopioną świątynię i wulkaniczną kuźnię.</li>
+<li data-en="Learn the first details now; release information will be announced on the game page." data-pl="Poznaj pierwsze informacje już teraz; szczegóły premiery zostaną ogłoszone na stronie gry.">Poznaj pierwsze informacje już teraz; szczegóły premiery zostaną ogłoszone na stronie gry.</li>
+</ul>
+<div class="portal-actions portal-actions-double">
+<span class="portal-status" data-en="Upcoming title" data-pl="Nadchodząca gra">Nadchodząca gra</span>
+<div class="portal-button-group">
+<a class="portal-button portal-button-secondary" href="dungeon-tiler/"><span aria-hidden="true">🜂</span><span data-en="Discover Dungeon Tiler" data-pl="Poznaj Dungeon Tiler">Poznaj Dungeon Tiler</span></a>
+</div>
+</div>
+</article>
+</div>
+<p class="portal-footer-note" data-en="Choose a game to continue. Legal information and contact details are available on the Geometric Evolution page." data-pl="Wybierz grę, aby przejść dalej. Informacje prawne i dane kontaktowe znajdziesz na stronie Geometrycznej Ewolucji.">Wybierz grę, aby przejść dalej. Informacje prawne i dane kontaktowe znajdziesz na stronie Geometrycznej Ewolucji.</p>
+</div>
+</div>
+<div class="site-shell">
+<header class="hero">
+<img alt="Ikona gry Geometryczna Ewolucja" class="hero-icon" src="assets/game-icon.webp"/>
+<div class="hero-center">
+<p class="eyebrow" data-en="PixelArray Games presents" data-pl="PixelArray Games przedstawia">PixelArray Games przedstawia</p>
+<h1 class="logo">
+<span class="logo-blue">Geometryczna</span>
+<span class="logo-gold">Ewolucja</span>
+</h1>
+<p class="hero-subtitle" data-en="Merge · Evolve · Discover" data-pl="Łącz · Ewoluuj · Odkrywaj">Łącz · Ewoluuj · Odkrywaj</p>
+</div>
+<div aria-hidden="true" class="hero-decoration">◇</div>
+</header><div class="global-language-bar">
+<button aria-label="Open PixelArray Games home" class="portal-open-button" id="portal-open-button" type="button"><span aria-hidden="true">▦</span><span data-en="PixelArray Games" data-pl="PixelArray Games">PixelArray Games</span></button>
+<button aria-label="Translate website to English" class="site-language-toggle" id="site-language-toggle" type="button">
+<span aria-hidden="true" class="site-language-flag">🇬🇧</span>
+<span class="site-language-label">English</span>
+</button>
+</div>
+<!--
+      GŁÓWNA NAWIGACJA
+      Aby dodać nową zakładkę:
+      1. skopiuj jeden przycisk .site-tab i nadaj mu nowe data-page,
+      2. niżej dodaj odpowiadający mu <section class="page" data-page-panel="...">.
+    -->
+<nav aria-label="Główna nawigacja strony" class="site-tabs" role="tablist">
+<button aria-selected="false" class="site-tab" data-page="start" role="tab" type="button"><span aria-hidden="true" class="tab-icon">◆</span><span class="tab-label" data-en="Home" data-pl="Start">Start</span></button>
+<button aria-selected="false" class="site-tab" data-page="game" role="tab" type="button"><span aria-hidden="true" class="tab-icon">△</span><span class="tab-label" data-en="Game" data-pl="Gra">Gra</span></button>
+<button aria-selected="false" class="site-tab" data-page="news" role="tab" type="button"><span aria-hidden="true" class="tab-icon">✦</span><span class="tab-label" data-en="News" data-pl="Aktualności">Aktualności</span></button>
+<button aria-selected="false" class="site-tab" data-page="reviews" role="tab" type="button"><span aria-hidden="true" class="tab-icon">★</span><span class="tab-label" data-en="Reviews" data-pl="Opinie">Opinie</span></button>
+
+<button aria-selected="true" class="site-tab" data-page="privacy" role="tab" type="button"><span aria-hidden="true" class="tab-icon">🔒</span><span class="tab-label" data-en="Privacy" data-pl="Prywatność">Prywatność</span></button>
+<button aria-selected="false" class="site-tab" data-page="contact" role="tab" type="button"><span aria-hidden="true" class="tab-icon">✉</span><span class="tab-label" data-en="Contact" data-pl="Kontakt">Kontakt</span></button>
+</nav>
+<main>
+<!-- ==================== START ==================== -->
+<section class="page page-frame" data-page-panel="start" hidden="">
+<div class="panel future-page">
+<div class="future-copy">
+<p class="eyebrow page-eyebrow" data-en="Official game website" data-pl="Oficjalna strona gry">Oficjalna strona gry</p>
+<h2 data-en="Welcome to the world of evolution" data-pl="Witaj w świecie ewolucji">Witaj w świecie ewolucji</h2>
+<p data-en="Merge identical shapes, discover new forms, and build an increasingly powerful geometric chain. Geometric Evolution combines the simplicity of 2048 with collecting unique shapes." data-pl="Łącz identyczne figury, odkrywaj kolejne formy i buduj coraz potężniejszy geometryczny łańcuch. Geometryczna Ewolucja łączy prostotę 2048 z kolekcjonowaniem unikalnych kształtów.">Łącz identyczne figury, odkrywaj kolejne formy i buduj coraz potężniejszy geometryczny łańcuch. Geometryczna Ewolucja łączy prostotę 2048 z kolekcjonowaniem unikalnych kształtów.</p>
+<div class="start-actions">
+<span class="coming-soon" data-en="Coming soon" data-pl="Premiera wkrótce">Premiera wkrótce</span>
+<div aria-disabled="true" class="play-store-badge" title="Odnośnik zostanie dodany po publikacji gry">
+<svg aria-hidden="true" class="play-store-icon" viewbox="0 0 64 64">
+<path d="M10 7v50l26-25z" fill="#36d7ff"></path>
+<path d="M10 7l33 19-7 6z" fill="#80df55"></path>
+<path d="M36 32l7 6-33 19z" fill="#ffd34d"></path>
+<path d="M43 26l10 6-10 6-7-6z" fill="#ff5b62"></path>
+</svg>
+<span><small data-en="Coming soon to" data-pl="Wkrótce w">Wkrótce w</small><strong>Google Play</strong></span>
+</div>
+</div>
+</div>
+<div aria-label="Plansza z geometrycznymi figurami z gry" class="mini-board geometry-board"><div class="mini-tile shape-tile tier-1"><img alt="punkt" src="assets/shapes/01-sphere.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="linia" src="assets/shapes/02-line.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="trójkąt" src="assets/shapes/03-triangle.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="kwadrat" src="assets/shapes/04-square.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="żółty wielokąt" src="assets/shapes/05-yellow.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="pomarańczowy wielokąt" src="assets/shapes/06-orange.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="romb" src="assets/shapes/07-diamond.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="czerwone koło" src="assets/shapes/08-red-circle.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="iskra" src="assets/shapes/09-sparkle.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="gwiazda" src="assets/shapes/10-starburst.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="spirala" src="assets/shapes/11-spiral.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="turkusowy owal" src="assets/shapes/12-cyan-oval.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="trójkąt" src="assets/shapes/03-triangle.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="romb" src="assets/shapes/07-diamond.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="spirala" src="assets/shapes/11-spiral.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="gwiazda" src="assets/shapes/10-starburst.png"/></div></div>
+</div>
+</section>
+<!-- ==================== GRA ==================== -->
+<section class="page page-frame" data-page-panel="game" hidden>
+<div class="panel future-page">
+<div class="future-copy">
+<p class="eyebrow page-eyebrow" data-en="Explore the mechanics" data-pl="Poznaj mechanikę">Poznaj mechanikę</p>
+<h2 data-en="Shape evolution" data-pl="Ewolucja figur">Ewolucja figur</h2>
+<p data-en="Move pieces across the board and merge identical shapes. Every merge creates a new form, progressing from simple points and lines to colorful crystals, stars, and cosmic shapes." data-pl="Przesuwaj elementy po planszy i łącz takie same figury. Każde połączenie tworzy nowy kształt, a kolejne etapy prowadzą od prostych punktów i linii do kolorowych kryształów, gwiazd oraz kosmicznych form.">Przesuwaj elementy po planszy i łącz takie same figury. Każde połączenie tworzy nowy kształt, a kolejne etapy prowadzą od prostych punktów i linii do kolorowych kryształów, gwiazd oraz kosmicznych form.</p>
+<div aria-label="Najważniejsze cechy gry" class="feature-chips">
+<span data-en="Simple controls" data-pl="Proste sterowanie">Proste sterowanie</span>
+<span data-en="Evolution chain" data-pl="Łańcuch ewolucji">Łańcuch ewolucji</span>
+<span data-en="Shape collection" data-pl="Kolekcja figur">Kolekcja figur</span>
+<span data-en="Four game modes" data-pl="Cztery tryby gry">Cztery tryby gry</span>
+</div>
+</div>
+<div aria-label="Przykładowy łańcuch ewolucji figur" class="mini-board geometry-board"><div class="mini-tile shape-tile tier-1"><img alt="punkt" src="assets/shapes/01-sphere.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="punkt" src="assets/shapes/01-sphere.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="linia" src="assets/shapes/02-line.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="linia" src="assets/shapes/02-line.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="trójkąt" src="assets/shapes/03-triangle.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="trójkąt" src="assets/shapes/03-triangle.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="kwadrat" src="assets/shapes/04-square.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="kwadrat" src="assets/shapes/04-square.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="żółty wielokąt" src="assets/shapes/05-yellow.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="pomarańczowy wielokąt" src="assets/shapes/06-orange.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="romb" src="assets/shapes/07-diamond.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="czerwone koło" src="assets/shapes/08-red-circle.png"/></div><div class="mini-tile shape-tile tier-1"><img alt="iskra" src="assets/shapes/09-sparkle.png"/></div><div class="mini-tile shape-tile tier-2"><img alt="gwiazda" src="assets/shapes/10-starburst.png"/></div><div class="mini-tile shape-tile tier-3"><img alt="spirala" src="assets/shapes/11-spiral.png"/></div><div class="mini-tile shape-tile tier-4"><img alt="turkusowy owal" src="assets/shapes/12-cyan-oval.png"/></div></div>
+<div class="game-video-block">
+<div class="video-heading">
+<h3 data-en="Watch the game in action" data-pl="Zobacz grę w akcji">Zobacz grę w akcji</h3>
+<span class="video-language-badge" data-en="Video: English" data-pl="Film: Polski">Film: Polski</span>
+</div>
+<div class="video-language-panel" data-video-language="pl">
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen data-src="https://www.youtube-nocookie.com/embed/ztuc495q9PM?rel=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Geometryczna Ewolucja — film po polsku"></iframe>
+</div>
+</div>
+<div class="video-language-panel" data-video-language="en" hidden>
+<div class="video-frame">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen data-src="https://www.youtube-nocookie.com/embed/QAYpsYXutMw?rel=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Geometric Evolution — English video"></iframe>
+</div>
+</div>
+<p class="video-note" data-en="The video is loaded from YouTube only after opening this tab. The embedded player uses YouTube's privacy-enhanced mode." data-pl="Film jest ładowany z YouTube dopiero po otwarciu tej zakładki. Osadzony odtwarzacz korzysta z trybu zwiększonej ochrony prywatności YouTube.">Film jest ładowany z YouTube dopiero po otwarciu tej zakładki. Osadzony odtwarzacz korzysta z trybu zwiększonej ochrony prywatności YouTube.</p>
+</div>
+</div>
+</section>
+<!-- ==================== AKTUALNOŚCI ==================== -->
+<section class="page page-frame" data-page-panel="news" hidden>
+<div class="panel content-page">
+<div class="update-header">
+<div>
+<p class="eyebrow" data-en="Next update" data-pl="Kolejna aktualizacja">Kolejna aktualizacja</p>
+<h2 data-en="Geometric Evolution 1.2.0" data-pl="Geometryczna Ewolucja 1.2.0">Geometryczna Ewolucja 1.2.0</h2>
+</div>
+<span class="version-badge" data-en="Coming to Google Play" data-pl="Wkrótce w Google Play">Wkrótce w Google Play</span>
+</div>
+<p class="content-lead" data-en="Update 1.2.0 refreshes the game’s visuals, adds new music and an interactive tutorial, and improves the Collection, controls and compatibility with the latest Android versions." data-pl="Aktualizacja 1.2.0 odświeża oprawę gry, dodaje nową muzykę i interaktywny samouczek, a także usprawnia Kolekcję, sterowanie i działanie na najnowszych wersjach Androida.">Aktualizacja 1.2.0 odświeża oprawę gry, dodaje nową muzykę i interaktywny samouczek, a także usprawnia Kolekcję, sterowanie i działanie na najnowszych wersjach Androida.</p>
+<div class="update-grid">
+<article class="update-card" data-icon="◆"><h3 data-en="Refreshed shape artwork" data-pl="Odświeżona oprawa figur">Odświeżona oprawa figur</h3><p data-en="All 8 sets received clearer artwork. The visuals of 96 evolution levels were updated without changing the rules, shape order or player progress." data-pl="Wszystkie 8 zestawów otrzymało czytelniejsze grafiki. Zaktualizowano wygląd 96 poziomów ewolucji bez zmiany zasad, kolejności figur ani postępów graczy.">Wszystkie 8 zestawów otrzymało czytelniejsze grafiki. Zaktualizowano wygląd 96 poziomów ewolucji bez zmiany zasad, kolejności figur ani postępów graczy.</p></article>
+<article class="update-card" data-icon="♫"><h3 data-en="9 new music tracks" data-pl="9 nowych utworów muzycznych">9 nowych utworów muzycznych</h3><p data-en="Every background now has its own matching track with smooth transitions. Music and sound-effect volume remain under the player’s control." data-pl="Każde tło otrzyma własny, dopasowany utwór z płynnym przejściem. Głośność muzyki i efektów pozostaje pod kontrolą gracza.">Każde tło otrzyma własny, dopasowany utwór z płynnym przejściem. Głośność muzyki i efektów pozostaje pod kontrolą gracza.</p></article>
+<article class="update-card" data-icon="?"><h3 data-en="Interactive tutorial" data-pl="Interaktywny samouczek">Interaktywny samouczek</h3><p data-en="After selecting New Game for the first time, new players see a real move and shape merge. The tutorial can be skipped or replayed from Options." data-pl="Po pierwszym wybraniu „Nowa gra” samouczek pokaże prawdziwy ruch i połączenie figur. Można go pominąć lub uruchomić ponownie z Opcji.">Po pierwszym wybraniu „Nowa gra” samouczek pokaże prawdziwy ruch i połączenie figur. Można go pominąć lub uruchomić ponownie z Opcji.</p></article>
+<article class="update-card" data-icon="▦"><h3 data-en="Improved Collection" data-pl="Ulepszona Kolekcja">Ulepszona Kolekcja</h3><p data-en="Shape-set and background cards adapt to the available width. Names, prices, previews and buttons remain readable in portrait orientation." data-pl="Karty zestawów figur i teł dopasowują się do szerokości ekranu. Nazwy, ceny, miniatury i przyciski pozostają czytelne w orientacji pionowej.">Karty zestawów figur i teł dopasowują się do szerokości ekranu. Nazwy, ceny, miniatury i przyciski pozostają czytelne w orientacji pionowej.</p></article>
+<article class="update-card" data-icon="↶"><h3 data-en="Clear undo rules" data-pl="Jasne zasady cofania">Jasne zasady cofania</h3><p data-en="The first 3 undos in every game are free. Only subsequent undos require watching a rewarded ad." data-pl="Pierwsze 3 cofnięcia w każdej rozgrywce są darmowe. Dopiero kolejne cofnięcia wymagają obejrzenia reklamy nagradzanej.">Pierwsze 3 cofnięcia w każdej rozgrywce są darmowe. Dopiero kolejne cofnięcia wymagają obejrzenia reklamy nagradzanej.</p></article>
+<article class="update-card" data-icon="A"><h3 data-en="Better Android support" data-pl="Lepsza obsługa Androida">Lepsza obsługa Androida</h3><p data-en="Improved Android 15 and 16 support, Back gesture handling, pausing, safe screen areas and edge-to-edge layouts." data-pl="Ulepszono obsługę Androida 15 i 16, gestu Wstecz, pauzy, bezpiecznych obszarów oraz interfejsu edge-to-edge.">Ulepszono obsługę Androida 15 i 16, gestu Wstecz, pauzy, bezpiecznych obszarów oraz interfejsu edge-to-edge.</p></article>
+<article class="update-card" data-icon="✓"><h3 data-en="Quality and stability fixes" data-pl="Poprawki jakości i stabilności">Poprawki jakości i stabilności</h3><p data-en="Improved font readability, portrait layouts, Polish and English texts, button labels, the Collection screen and update-safe save handling." data-pl="Poprawiono czytelność fontów, układ pionowy, teksty PL/EN, etykiety przycisków, ekran Kolekcji oraz zachowanie zapisów po aktualizacji.">Poprawiono czytelność fontów, układ pionowy, teksty PL/EN, etykiety przycisków, ekran Kolekcji oraz zachowanie zapisów po aktualizacji.</p></article>
+<article class="update-card" data-icon="★"><h3 data-en="Your progress stays with you" data-pl="Twój postęp zostaje">Twój postęp zostaje</h3><p data-en="The update preserves existing saves, statistics, unlocked content and player progress." data-pl="Aktualizacja zachowuje dotychczasowe zapisy, statystyki, odblokowane elementy i postęp gracza.">Aktualizacja zachowuje dotychczasowe zapisy, statystyki, odblokowane elementy i postęp gracza.</p></article>
+</div>
+<div class="update-footer"><strong data-en="Coming next:" data-pl="Już wkrótce:">Już wkrótce:</strong> <span data-en="discover refreshed shape sets, new music and smoother gameplay in version 1.2.0." data-pl="odkryj odświeżone zestawy figur, nową muzykę i wygodniejszą rozgrywkę w wersji 1.2.0.">odkryj odświeżone zestawy figur, nową muzykę i wygodniejszą rozgrywkę w wersji 1.2.0.</span></div>
+<div class="update-history-link-row">
+<div class="update-history-link-copy">
+<strong data-en="Complete update archive" data-pl="Pełna historia aktualizacji">Pełna historia aktualizacji</strong>
+<p data-en="Older release notes will be collected in one place as new versions of the game are published." data-pl="Wraz z publikacją kolejnych wersji w jednym miejscu będą zbierane informacje o wcześniejszych aktualizacjach gry.">Wraz z publikacją kolejnych wersji w jednym miejscu będą zbierane informacje o wcześniejszych aktualizacjach gry.</p>
+</div>
+<a class="update-history-link" href="#updates"><span aria-hidden="true">▦</span><span data-en="Open update history" data-pl="Otwórz historię aktualizacji">Otwórz historię aktualizacji</span></a>
+</div>
+</div>
+</section>
+<!-- ==================== HISTORIA AKTUALIZACJI ==================== -->
+<section class="page page-frame" data-page-panel="updates" hidden>
+<div class="panel content-page update-history-page">
+<a class="history-back-link" href="#news"><span aria-hidden="true">←</span><span data-en="Back to news" data-pl="Wróć do aktualności">Wróć do aktualności</span></a>
+<p class="eyebrow" data-en="Version archive" data-pl="Archiwum wersji">Archiwum wersji</p>
+<h2 data-en="Update history" data-pl="Historia aktualizacji">Historia aktualizacji</h2>
+<p class="content-lead" data-en="This page collects the most important changes between consecutive public versions of Geometric Evolution. New entries can be added without expanding the main navigation." data-pl="W tym miejscu zbierane są najważniejsze zmiany pomiędzy kolejnymi publicznymi wersjami Geometrycznej Ewolucji. Nowe wpisy można dodawać bez rozbudowy głównego menu.">W tym miejscu zbierane są najważniejsze zmiany pomiędzy kolejnymi publicznymi wersjami Geometrycznej Ewolucji. Nowe wpisy można dodawać bez rozbudowy głównego menu.</p>
+<div class="update-timeline">
+<!-- Przy kolejnej wersji skopiuj cały article.history-entry i dodaj go nad najnowszym wpisem. -->
+<article class="history-entry current">
+<div class="history-entry-header">
+<h3>1.1.0 → 1.2.0</h3>
+<span class="history-status" data-en="Preparing for release" data-pl="W przygotowaniu do publikacji">W przygotowaniu do publikacji</span>
+</div>
+<p data-en="A major visual, audio and usability update that preserves existing saves and player progress." data-pl="Duża aktualizacja oprawy, dźwięku i wygody obsługi, zachowująca dotychczasowe zapisy oraz postęp gracza.">Duża aktualizacja oprawy, dźwięku i wygody obsługi, zachowująca dotychczasowe zapisy oraz postęp gracza.</p>
+<ul>
+<li><span data-en="New artwork for 8 shape sets and 96 evolution levels." data-pl="Nowa oprawa 8 zestawów figur i 96 poziomów ewolucji.">Nowa oprawa 8 zestawów figur i 96 poziomów ewolucji.</span></li>
+<li><span data-en="9 background-matched music tracks with smooth transitions." data-pl="9 utworów dopasowanych do teł oraz płynne przejścia muzyczne.">9 utworów dopasowanych do teł oraz płynne przejścia muzyczne.</span></li>
+<li><span data-en="Interactive tutorial and an improved Collection layout." data-pl="Interaktywny samouczek i poprawiony układ Kolekcji.">Interaktywny samouczek i poprawiony układ Kolekcji.</span></li>
+<li><span data-en="Three free undos in every game; later undos may use a rewarded ad." data-pl="Trzy darmowe cofnięcia w każdej rozgrywce; kolejne mogą korzystać z reklamy nagradzanej.">Trzy darmowe cofnięcia w każdej rozgrywce; kolejne mogą korzystać z reklamy nagradzanej.</span></li>
+<li><span data-en="Better Android 15/16, Back gesture, safe-area and portrait-layout support." data-pl="Lepsza obsługa Androida 15/16, gestu Wstecz, bezpiecznych obszarów i układu pionowego.">Lepsza obsługa Androida 15/16, gestu Wstecz, bezpiecznych obszarów i układu pionowego.</span></li>
+</ul>
+</article>
+<article class="history-entry archived">
+<div class="history-entry-header">
+<h3>1.0.0 → 1.1.0</h3>
+<span class="history-status" data-en="Released" data-pl="Opublikowana">Opublikowana</span>
+</div>
+<p data-en="The biggest update since launch added the global Google Play Games leaderboard, full portrait mode and broad interface improvements across the game." data-pl="Największa aktualizacja od premiery dodała globalny ranking Gier Play, pełny tryb pionowy oraz liczne usprawnienia interfejsu w całej grze.">Największa aktualizacja od premiery dodała globalny ranking Gier Play, pełny tryb pionowy oraz liczne usprawnienia interfejsu w całej grze.</p>
+<ul>
+<li><span data-en="Global Google Play Games leaderboard with separate local and worldwide score tabs." data-pl="Globalny ranking Gier Play z osobnymi zakładkami wyników lokalnych i światowych.">Globalny ranking Gier Play z osobnymi zakładkami wyników lokalnych i światowych.</span></li>
+<li><span data-en="Full portrait mode, selectable in Options → Orientation, with every screen adapted for one-handed play and dedicated portrait backgrounds." data-pl="Pełny tryb pionowy wybierany w Opcje → Orientacja, ze wszystkimi ekranami dostosowanymi do gry jedną ręką i dedykowanymi tłami pionowymi.">Pełny tryb pionowy wybierany w Opcje → Orientacja, ze wszystkimi ekranami dostosowanymi do gry jedną ręką i dedykowanymi tłami pionowymi.</span></li>
+<li><span data-en="Larger, clearer fonts throughout the game and improved support for tablets and large-screen devices." data-pl="Większa, czytelniejsza czcionka w całej grze oraz lepsza obsługa tabletów i urządzeń z dużymi ekranami.">Większa, czytelniejsza czcionka w całej grze oraz lepsza obsługa tabletów i urządzeń z dużymi ekranami.</span></li>
+<li><span data-en="Faster opening of the Collection screen and smoother scrolling in Options." data-pl="Szybsze otwieranie ekranu Kolekcji i płynniejsze przewijanie w Opcjach.">Szybsze otwieranie ekranu Kolekcji i płynniejsze przewijanie w Opcjach.</span></li>
+<li><span data-en="Reset Missions now refreshes only unfinished missions, while completed missions and their points remain unchanged." data-pl="Przycisk „Reset misji” odświeża tylko nieukończone misje, a wykonane zadania i zdobyte punkty pozostają bez zmian.">Przycisk „Reset misji” odświeża tylko nieukończone misje, a wykonane zadania i zdobyte punkty pozostają bez zmian.</span></li>
+<li><span data-en="Mission completion notifications no longer appear again after a mission has already been completed." data-pl="Powiadomienie o ukończeniu misji nie pojawia się ponownie po jej zaliczeniu.">Powiadomienie o ukończeniu misji nie pojawia się ponownie po jej zaliczeniu.</span></li>
+<li><span data-en="The loading screen starts in the orientation most recently selected by the player." data-pl="Ekran ładowania uruchamia się w ostatnio wybranej przez gracza orientacji.">Ekran ładowania uruchamia się w ostatnio wybranej przez gracza orientacji.</span></li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+<!-- ==================== OPINIE ==================== -->
+<section class="page page-frame" data-page-panel="reviews" hidden>
+<div class="panel content-page">
+<p class="eyebrow" data-en="Your feedback matters" data-pl="Twoja opinia ma znaczenie">Twoja opinia ma znaczenie</p>
+<h2 data-en="Player feedback" data-pl="Opinie graczy">Opinie graczy</h2>
+<p class="content-lead" data-en="Feedback helps improve Geometric Evolution. Tell us what works well, what should be clearer and what you would like to see in future updates." data-pl="Opinie pomagają rozwijać Geometryczną Ewolucję. Napisz, co działa dobrze, co warto poprawić i czego oczekujesz w kolejnych aktualizacjach.">Opinie pomagają rozwijać Geometryczną Ewolucję. Napisz, co działa dobrze, co warto poprawić i czego oczekujesz w kolejnych aktualizacjach.</p>
+<span class="feedback-status" data-en="Waiting for the first published reviews" data-pl="Czekamy na pierwsze opublikowane opinie">Czekamy na pierwsze opublikowane opinie</span>
+<div class="feedback-grid">
+<article class="feedback-card" data-icon="△"><h3 data-en="Gameplay" data-pl="Rozgrywka">Rozgrywka</h3><p data-en="Share your thoughts about merging shapes, game modes, difficulty and undo rules." data-pl="Oceń łączenie figur, tryby gry, poziom trudności i zasady cofania ruchów.">Oceń łączenie figur, tryby gry, poziom trudności i zasady cofania ruchów.</p></article>
+<article class="feedback-card" data-icon="♫"><h3 data-en="Visuals and sound" data-pl="Grafika i dźwięk">Grafika i dźwięk</h3><p data-en="Tell us how you like the shape sets, backgrounds, music and sound effects." data-pl="Napisz, jak oceniasz zestawy figur, tła, muzykę i efekty dźwiękowe.">Napisz, jak oceniasz zestawy figur, tła, muzykę i efekty dźwiękowe.</p></article>
+<article class="feedback-card" data-icon="▦"><h3 data-en="Interface" data-pl="Interfejs">Interfejs</h3><p data-en="Let us know whether the Collection, tutorial, buttons and portrait layout are clear and comfortable." data-pl="Daj znać, czy Kolekcja, samouczek, przyciski i układ pionowy są czytelne oraz wygodne.">Daj znać, czy Kolekcja, samouczek, przyciski i układ pionowy są czytelne oraz wygodne.</p></article>
+<article class="feedback-card" data-icon="!"><h3 data-en="Stability" data-pl="Stabilność">Stabilność</h3><p data-en="Report a problem and include your Android version, device model and the steps that caused it." data-pl="Zgłaszając problem, podaj wersję Androida, model urządzenia i kroki prowadzące do błędu.">Zgłaszając problem, podaj wersję Androida, model urządzenia i kroki prowadzące do błędu.</p></article>
+</div>
+<div class="feedback-cta">
+<strong data-en="Send feedback:" data-pl="Prześlij opinię:">Prześlij opinię:</strong>
+<p data-en="The website does not use a review form or require an account. Your email app will open and you decide what information to include." data-pl="Strona nie korzysta z formularza opinii i nie wymaga konta. Otworzy się Twoja aplikacja pocztowa, a Ty zdecydujesz, jakie informacje przesłać.">Strona nie korzysta z formularza opinii i nie wymaga konta. Otworzy się Twoja aplikacja pocztowa, a Ty zdecydujesz, jakie informacje przesłać.</p>
+<a class="contact-link feedback-contact" href="mailto:games@pixelarray.pl?subject=Opinia%20o%20Geometrycznej%20Ewolucji">✉ games@pixelarray.pl</a>
+</div>
+</div>
+</section>
+
+<!-- ==================== POLITYKA PRYWATNOŚCI ==================== -->
+<section class="page page-frame" data-page-panel="privacy">
+<div class="panel">
+<header class="panel-head">
+<div class="panel-title-wrap">
+<div aria-hidden="true" class="flag-tile" id="policy-flag">🇵🇱</div>
+<div>
+<h2 id="policy-main-title">Polityka prywatności</h2>
+<p class="meta" id="policy-main-meta">Data wejścia w życie: <strong>29 lipca 2026</strong> · Wersja 1.1</p>
+</div>
+</div>
+<div aria-label="Wybierz język polityki prywatności" class="language-switch">
+<button aria-pressed="true" class="language-button" data-language="pl" type="button">🇵🇱 Polski</button>
+<button aria-pressed="false" class="language-button" data-language="en" type="button">🇬🇧 English</button>
+</div>
+</header>
+<!-- Wersja polska -->
+<div class="policy-body" data-language-panel="pl">
+<div class="policy-grid">
+<article class="policy-section"><span class="section-number">1</span><h3>Informacje ogólne</h3><p>Niniejsza polityka dotyczy gry mobilnej <strong>Geometryczna Ewolucja</strong> oraz jej oficjalnej strony internetowej, opublikowanych przez <strong>PixelArray Games / Piotr Stefaniak</strong>.</p><p>Dokument opisuje lokalne zapisy Gry, dobrowolne reklamy nagradzane, osadzone filmy YouTube oraz kontakt e-mail.</p></article>
+<article class="policy-section"><span class="section-number">2</span><h3>Dane zapisywane przez Grę</h3><p>Gra nie wymaga konta ani logowania i nie przesyła postępów rozgrywki na serwer Dewelopera.</p><p>Lokalnie na urządzeniu mogą być zapisywane:</p><ul><li>stan planszy, postęp, wyniki, rekordy i statystyki,</li><li>odblokowane figury, tła i inne elementy,</li><li>ustawienia języka, grafiki, muzyki i efektów,</li><li>stan samouczka oraz informacje potrzebne do działania funkcji cofania.</li></ul><p>Aktualizacja 1.2.0 zachowuje dotychczasowe lokalne zapisy i postęp gracza.</p></article>
+<article class="policy-section"><span class="section-number">3</span><h3>Uprawnienia i połączenie z Internetem</h3><p>Gra może korzystać z uprawnienia <strong>INTERNET</strong> w celu załadowania reklamy nagradzanej. Nie wymaga dostępu do kontaktów, zdjęć, dokładnej lokalizacji ani mikrofonu na potrzeby podstawowej rozgrywki.</p></article>
+<article class="policy-section"><span class="section-number">4</span><h3>Reklamy i zakupy w aplikacji</h3><p>Pierwsze <strong>3 cofnięcia</strong> w każdej rozgrywce są darmowe. Kolejne cofnięcie może wymagać świadomego uruchomienia i obejrzenia reklamy nagradzanej.</p><p>Dostawca reklamy może przetwarzać dane techniczne niezbędne do dostarczenia reklamy, pomiaru jej działania i zapobiegania nadużyciom. Zakres ten zależy od SDK reklamowego użytego w opublikowanej wersji Gry i powinien odpowiadać deklaracji „Bezpieczeństwo danych” w Google Play.</p><p>Gra nie zawiera aktywnych zakupów w aplikacji.</p></article>
+<article class="policy-section"><span class="section-number">5</span><h3>Strona internetowa i filmy YouTube</h3><p>Strona nie wymaga konta i nie korzysta z własnego systemu analitycznego. Lokalnie w przeglądarce zapisuje wyłącznie wybrany język strony.</p><p>Zakładka „Gra” zawiera filmy osadzone z YouTube w trybie zwiększonej ochrony prywatności. Film jest ładowany dopiero po otwarciu tej zakładki. Po załadowaniu lub odtworzeniu materiału YouTube/Google może otrzymać dane techniczne zgodnie z własnymi zasadami prywatności.</p></article>
+<article class="policy-section"><span class="section-number">6</span><h3>Opinie i kontakt e-mail</h3><p>Strona nie posiada formularza opinii. Użytkownik może dobrowolnie wysłać wiadomość ze swojej aplikacji pocztowej. Deweloper przetwarza wtedy adres e-mail i treść wiadomości wyłącznie w celu obsługi opinii, pytania lub zgłoszenia błędu.</p><p>Treść opinii nie będzie publikowana na stronie bez zgody autora.</p></article>
+<article class="policy-section"><span class="section-number">7</span><h3>Dzieci</h3><p>Gra jest logiczną grą łamigłówkową odpowiednią dla różnych grup wiekowych. Nie prosi dzieci o utworzenie konta ani podanie danych osobowych. Reklamy dostępne dla dzieci lub użytkowników o nieznanym wieku muszą być konfigurowane zgodnie z wymaganiami Google Play dotyczącymi aplikacji dla rodzin.</p></article>
+<article class="policy-section"><span class="section-number">8</span><h3>Zmiany polityki prywatności</h3><p>Polityka może być aktualizowana przy wprowadzaniu nowych funkcji, SDK lub sposobów przetwarzania danych. Aktualna wersja będzie dostępna na tej stronie wraz z datą wejścia w życie.</p></article>
+<article class="policy-section wide"><span class="section-number">9</span><h3>Bezpieczeństwo danych</h3><p class="safety-commitment">Zobowiązanie do przestrzegania zasad dotyczących aplikacji dla rodzin w Google Play</p><p>Deklaracja bezpieczeństwa danych w Google Play powinna pozostawać zgodna z faktycznym działaniem opublikowanej wersji Gry i użytych w niej zewnętrznych SDK.</p></article>
+<article class="policy-section wide"><span class="section-number">10</span><h3>Kontakt</h3><p>W sprawach związanych z prywatnością możesz skontaktować się z Deweloperem:</p><a class="contact-link" href="mailto:games@pixelarray.pl">✉ games@pixelarray.pl</a></article>
+</div>
+</div>
+<!-- English version -->
+<div class="policy-body" data-language-panel="en" hidden lang="en">
+<div class="policy-grid">
+<article class="policy-section"><span class="section-number">1</span><h3>General information</h3><p>This policy applies to the mobile game <strong>Geometryczna Ewolucja (Geometric Evolution)</strong> and its official website, published by <strong>PixelArray Games / Piotr Stefaniak</strong>.</p><p>It describes local Game saves, optional rewarded ads, embedded YouTube videos and email contact.</p></article>
+<article class="policy-section"><span class="section-number">2</span><h3>Data stored by the Game</h3><p>The Game does not require an account or login and does not upload gameplay progress to the Developer’s server.</p><p>The following data may be stored locally on the device:</p><ul><li>board state, progress, scores, high scores and statistics,</li><li>unlocked shapes, backgrounds and other content,</li><li>language, graphics, music and sound settings,</li><li>tutorial state and information required for the undo feature.</li></ul><p>Update 1.2.0 preserves existing local saves and player progress.</p></article>
+<article class="policy-section"><span class="section-number">3</span><h3>Permissions and Internet access</h3><p>The Game may use the <strong>INTERNET</strong> permission to load a rewarded ad. Core gameplay does not require access to contacts, photos, precise location or the microphone.</p></article>
+<article class="policy-section"><span class="section-number">4</span><h3>Advertising and in-app purchases</h3><p>The first <strong>3 undos</strong> in each game are free. A subsequent undo may require the player to deliberately start and watch a rewarded ad.</p><p>The ad provider may process technical data required to deliver the ad, measure its operation and prevent abuse. The exact scope depends on the advertising SDK included in the published Game version and should match the Google Play Data safety declaration.</p><p>The Game does not contain active in-app purchases.</p></article>
+<article class="policy-section"><span class="section-number">5</span><h3>Website and YouTube videos</h3><p>The website does not require an account and does not use its own analytics system. It stores only the selected website language locally in the browser.</p><p>The Game tab contains YouTube videos embedded using privacy-enhanced mode. A video is loaded only after the tab is opened. After loading or playing the content, YouTube/Google may receive technical data under its own privacy rules.</p></article>
+<article class="policy-section"><span class="section-number">6</span><h3>Feedback and email contact</h3><p>The website does not use a feedback form. A user may voluntarily send a message through their own email app. The Developer then processes the email address and message content only to handle the feedback, question or bug report.</p><p>Feedback will not be published on the website without the author’s consent.</p></article>
+<article class="policy-section"><span class="section-number">7</span><h3>Children</h3><p>The Game is a logic puzzle suitable for different age groups. It does not ask children to create an account or provide personal data. Ads available to children or users of unknown age must be configured in accordance with Google Play’s Families Policy Requirements.</p></article>
+<article class="policy-section"><span class="section-number">8</span><h3>Changes to this policy</h3><p>This policy may be updated when new features, SDKs or data-processing methods are introduced. The current version will be available on this page together with its effective date.</p></article>
+<article class="policy-section wide"><span class="section-number">9</span><h3>Data safety</h3><p class="safety-commitment">Commitment to comply with Google Play’s Families Policy Requirements</p><p>The Google Play Data safety declaration should remain consistent with the actual behaviour of the published Game version and the third-party SDKs it includes.</p></article>
+<article class="policy-section wide"><span class="section-number">10</span><h3>Contact</h3><p>For privacy-related matters, you can contact the Developer at:</p><a class="contact-link" href="mailto:games@pixelarray.pl">✉ games@pixelarray.pl</a></article>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== KONTAKT ==================== -->
+<section class="page page-frame" data-page-panel="contact" hidden="">
+<div class="panel future-page">
+<div class="future-copy">
+<p class="eyebrow" data-en="Contact the developer" data-pl="Kontakt z deweloperem" style="color:#8b4a24">Kontakt z deweloperem</p>
+<h2 data-en="Contact us" data-pl="Napisz do nas">Napisz do nas</h2>
+<p data-en="Have a question, suggestion, or bug report? Send a message to the address below. Social media links and a support form can be added here later." data-pl="Masz pytanie, sugestię albo chcesz zgłosić błąd? Napisz bezpośrednio na poniższy adres. W przyszłości znajdą się tu także odnośniki do mediów społecznościowych i formularz wsparcia.">Masz pytanie, sugestię albo chcesz zgłosić błąd? Napisz bezpośrednio na poniższy adres. W przyszłości znajdą się tu także odnośniki do mediów społecznościowych i formularz wsparcia.</p>
+<a class="contact-link" href="mailto:games@pixelarray.pl">✉ games@pixelarray.pl</a>
+</div>
+<div aria-hidden="true" class="mini-board">
+<div class="mini-tile">@</div><div class="mini-tile">✉</div><div class="mini-tile">◇</div><div class="mini-tile">?</div>
+<div class="mini-tile">P</div><div class="mini-tile">I</div><div class="mini-tile">X</div><div class="mini-tile">E</div>
+<div class="mini-tile">L</div><div class="mini-tile">◆</div><div class="mini-tile">A</div><div class="mini-tile">R</div>
+<div class="mini-tile">R</div><div class="mini-tile">A</div><div class="mini-tile">Y</div><div class="mini-tile">✦</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+      © 2026 PixelArray Games / Piotr Stefaniak · Geometryczna Ewolucja
+    </footer>
+</div>
+<script>
+    (() => {
+      const pageTabs = [...document.querySelectorAll('[data-page]')];
+      const pages = [...document.querySelectorAll('[data-page-panel]')];
+      const policyLanguageButtons = [...document.querySelectorAll('[data-language]')];
+      const policyLanguagePanels = [...document.querySelectorAll('[data-language-panel]')];
+      const siteLanguageToggle = document.getElementById('site-language-toggle');
+      const translatableElements = [...document.querySelectorAll('[data-pl][data-en]')];
+      const videoLanguagePanels = [...document.querySelectorAll('[data-video-language]')];
+      const portalOverlay = document.getElementById('portal-overlay');
+      const portalOpenButton = document.getElementById('portal-open-button');
+      const portalGameButtons = [...document.querySelectorAll('[data-open-game]')];
+      const portalPageButtons = [...document.querySelectorAll('[data-open-page]')];
+
+      const titles = {
+        pl: {
+          hub: 'PixelArray Games — Wybór gry',
+          start: 'Geometryczna Ewolucja — Strona główna',
+          game: 'Geometryczna Ewolucja — O grze',
+          news: 'Geometryczna Ewolucja — Aktualności',
+          updates: 'Geometryczna Ewolucja — Historia aktualizacji',
+          reviews: 'Geometryczna Ewolucja — Opinie',
+          privacy: 'Geometryczna Ewolucja — Polityka prywatności',
+          contact: 'Geometryczna Ewolucja — Kontakt'
+        },
+        en: {
+          hub: 'PixelArray Games — Choose your game',
+          start: 'Geometric Evolution — Home',
+          game: 'Geometric Evolution — Game',
+          news: 'Geometric Evolution — News',
+          updates: 'Geometric Evolution — Update history',
+          reviews: 'Geometric Evolution — Reviews',
+          privacy: 'Geometric Evolution — Privacy Policy',
+          contact: 'Geometric Evolution — Contact'
+        }
+      };
+
+      let siteLanguage = 'pl';
+      let currentPage = 'hub';
+
+
+
+      function updateVideoLanguage(loadVideo = false) {
+        videoLanguagePanels.forEach(panel => {
+          const active = panel.dataset.videoLanguage === siteLanguage;
+          panel.hidden = !active;
+          if (active && loadVideo) {
+            const frame = panel.querySelector('iframe[data-src]');
+            if (frame && !frame.hasAttribute('src')) frame.setAttribute('src', frame.dataset.src);
+          }
+        });
+      }
+
+      function updateDocumentTitle() {
+        const showingHub = document.body.classList.contains('hub-active');
+        if (showingHub) {
+          document.title = titles[siteLanguage].hub;
+          return;
+        }
+        document.title = titles[siteLanguage][currentPage] || titles[siteLanguage].start;
+      }
+
+      function showPage(pageName, updateHash = true) {
+        const exists = pages.some(page => page.dataset.pagePanel === pageName);
+        const safePage = exists ? pageName : 'start';
+        currentPage = safePage;
+
+        if (portalOverlay) portalOverlay.hidden = true;
+        document.body.classList.remove('hub-active');
+
+        pages.forEach(page => {
+          page.hidden = page.dataset.pagePanel !== safePage;
+        });
+
+        pageTabs.forEach(tab => {
+          const active = tab.dataset.page === safePage;
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+
+        updateDocumentTitle();
+        updateVideoLanguage(safePage === 'game');
+
+        if (updateHash) history.replaceState(null, '', `#${safePage}`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function showHub(updateUrl = true) {
+        if (!portalOverlay) return;
+        portalOverlay.hidden = false;
+        document.body.classList.remove('portal-open');
+        document.body.classList.add('hub-active');
+        currentPage = 'hub';
+        if (updateUrl) history.replaceState(null, '', window.location.pathname);
+        updateDocumentTitle();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function hideHub() {
+        if (!portalOverlay) return;
+        portalOverlay.hidden = true;
+        document.body.classList.remove('hub-active');
+        updateDocumentTitle();
+      }
+
+      function openGeometryPage(targetPage = 'start') {
+        hideHub();
+        showPage(targetPage, true);
+      }
+
+      function setSiteLanguage(language, save = true) {
+        siteLanguage = language === 'en' ? 'en' : 'pl';
+        document.documentElement.lang = siteLanguage;
+
+        translatableElements.forEach(element => {
+          element.textContent = element.dataset[siteLanguage];
+        });
+
+        const switchingToEnglish = siteLanguage === 'pl';
+        siteLanguageToggle.querySelector('.site-language-flag').textContent = switchingToEnglish ? '🇬🇧' : '🇵🇱';
+        siteLanguageToggle.querySelector('.site-language-label').textContent = switchingToEnglish ? 'English' : 'Polski';
+        siteLanguageToggle.setAttribute('aria-label', switchingToEnglish ? 'Translate website to English' : 'Przetłumacz stronę na język polski');
+
+        updateDocumentTitle();
+        updateVideoLanguage(currentPage === 'game');
+        if (save) {
+          try { localStorage.setItem('geometry-site-language', siteLanguage); } catch (_) {}
+        }
+      }
+
+      function setPolicyLanguage(language) {
+        const safeLanguage = language === 'en' ? 'en' : 'pl';
+        policyLanguagePanels.forEach(panel => {
+          panel.hidden = panel.dataset.languagePanel !== safeLanguage;
+        });
+
+        policyLanguageButtons.forEach(button => {
+          button.setAttribute('aria-pressed', String(button.dataset.language === safeLanguage));
+        });
+
+        const english = safeLanguage === 'en';
+        document.getElementById('policy-flag').textContent = english ? '🇬🇧' : '🇵🇱';
+        document.getElementById('policy-main-title').textContent = english ? 'Privacy Policy' : 'Polityka prywatności';
+        document.getElementById('policy-main-meta').innerHTML = english
+          ? 'Effective date: <strong>July 29, 2026</strong> · Version 1.1'
+          : 'Data wejścia w życie: <strong>29 lipca 2026</strong> · Wersja 1.1';
+      }
+
+      pageTabs.forEach(tab => {
+        tab.addEventListener('click', () => showPage(tab.dataset.page));
+        tab.addEventListener('keydown', event => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          const currentIndex = pageTabs.indexOf(tab);
+          let nextIndex = currentIndex;
+          if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + pageTabs.length) % pageTabs.length;
+          if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % pageTabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = pageTabs.length - 1;
+          pageTabs[nextIndex].focus();
+          showPage(pageTabs[nextIndex].dataset.page);
+        });
+      });
+
+      policyLanguageButtons.forEach(button => {
+        button.addEventListener('click', () => setPolicyLanguage(button.dataset.language));
+      });
+
+      siteLanguageToggle.addEventListener('click', () => {
+        setSiteLanguage(siteLanguage === 'pl' ? 'en' : 'pl');
+      });
+
+      if (portalOpenButton) {
+        portalOpenButton.addEventListener('click', () => showHub(true));
+      }
+
+      portalGameButtons.forEach(button => {
+        button.addEventListener('click', () => openGeometryPage(button.dataset.targetPage || 'start'));
+      });
+
+      portalPageButtons.forEach(button => {
+        button.addEventListener('click', () => openGeometryPage(button.dataset.openPage || 'privacy'));
+      });
+
+      window.addEventListener('hashchange', () => {
+        const nextPage = location.hash.slice(1);
+        if (!nextPage) {
+          showHub(false);
+          return;
+        }
+        showPage(nextPage, false);
+      });
+
+      let savedLanguage = 'pl';
+      try { savedLanguage = localStorage.getItem('geometry-site-language') || 'pl'; } catch (_) {}
+      setSiteLanguage(savedLanguage, false);
+      const initialHash = location.hash.slice(1);
+      if (initialHash) {
+        showPage(initialHash, false);
+      } else {
+        showHub(false);
+      }
+      setPolicyLanguage('pl');
+    })();
+</script>
+</body>
+</html>
